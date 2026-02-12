@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Valentine 💗</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ffe6f0, #ffffff);
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    color: #ff4d88;
+    font-size: 32px;
+}
+
+.buttons {
+    margin-top: 30px;
+    position: relative;
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+#yes {
+    background-color: #ff66a3;
+    color: white;
+}
+
+#no {
+    background-color: #ffffff;
+    color: #ff66a3;
+    border: 2px solid #ff66a3;
+    position: absolute;
+}
+
+.heart {
+    position: absolute;
+    font-size: 20px;
+    animation: float 5s linear infinite;
+}
+
+@keyframes float {
+    from { transform: translateY(100vh); }
+    to { transform: translateY(-10vh); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Ты будешь моим Валентином? 💖</h1>
+    <div class="buttons">
+        <button id="yes">Да</button>
+        <button id="no">Нет</button>
+    </div>
+</div>
+
+<script>
+let yesButton = document.getElementById("yes");
+let noButton = document.getElementById("no");
+let size = 1;
+let noClicks = 0;
+
+noButton.addEventListener("click", function() {
+    size += 0.3;
+    yesButton.style.transform = "scale(" + size + ")";
+    
+    noClicks++;
+    
+    if (noClicks > 30) {
+        noButton.style.display = "none";
+    } else {
+        let x = Math.random() * 300 - 150;
+        let y = Math.random() * 200 - 100;
+        noButton.style.transform = `translate(${x}px, ${y}px)`;
+    }
+});
+
+yesButton.addEventListener("click", function() {
+    document.body.innerHTML = "<h1 style='color:#ff4d88; text-align:center; margin-top:40vh;'>Я так и знал 😌💗</h1>";
+});
+
+// Сердечки
+setInterval(() => {
+    let heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerText = "💗";
+    heart.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 5000);
+}, 800);
+</script>
+
+</body>
+</html>
